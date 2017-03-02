@@ -387,6 +387,8 @@ public class PokeOS {
                         Matcher m = p.matcher(line);
 
                         // indicate all matches on the line
+                        System.out.println("test");
+                        System.out.println(p.matcher(line));
                         while (m.find()) {
                             System.out.println("//////////////////////////////////////////////////////////////////////////////////////////");
                             offset = m.start();
@@ -451,6 +453,50 @@ public class PokeOS {
             }
         }
         borrados.Clear();
+        write();
     }
+    public void write() {
+        File archivo;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            archivo = new File("./Pokemon.txt");
+            fw = new FileWriter(archivo, false);
+            bw = new BufferedWriter(fw);
+            for (int i = 0; i < entrenadores_existentes.size(); i++) {
+                bw.write(entrenadores_existentes.get(i).toFile());
+            }
+            bw.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+            }
 
+        }
+    }
+    public void clear(){
+        entrenadores_existentes.clear();
+        File archivo;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            archivo = new File("./Pokemon.txt");
+            fw = new FileWriter(archivo, false);
+            bw = new BufferedWriter(fw);
+            bw.write("");
+            bw.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+            }
+        }
+    }
 }

@@ -882,6 +882,9 @@
               <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\POKEDEX\1488368840_delete.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton11">
           <Properties>

@@ -263,5 +263,21 @@ public class Pokemon {
 
         return nombre + ";" + apodo + ";" + descripcion + ";" + altura + ";" + categoria + ";" + peso + ";" + habilidad1 + ";" + habilidad2 + ";" + habilidad3 + ";" + habilidad4 + ";" + genero + ";" + tipo1 + ";" + tipo2 + ";" + debilidad1 + ";" + debilidad2 + ";" + hp + ";" + ataque + ";" + defensa + ";" + ataque_especial + ";" + velocidad + ";" + image_dir + ";" + evo;
     }
+    public String toFile1() {
+        String evo = "";
+        if (evoluciones.isEmpty()) {
+            evo = "No Tiene Evoluciones";
+        } else {
+            for (int i = 0; i < evoluciones.size(); i++) {
+                if (i == evoluciones.size() - 1) {
+                    evo = evo + evoluciones.get(i);
+                } else {
+                    evo = evo + evoluciones.get(i) + "\n";
+                }
+            }
+        }
+
+        return "Nombre: "+ nombre +"\nApodo: "+ apodo + "\nDescripcion: " + descripcion + "\nAltura: " + altura + "\nCategoria: " + categoria + "\nPeso: " + peso + "\nHabilidad 1:" + habilidad1 + "\nHabilidad 2:" + habilidad2 + "\nHabilidad 3:" + habilidad3 + "\nHabilidad 4:" + habilidad4 + "\nGenero: " + genero + "\nTipo 1: " + tipo1 + "\nTipo 2: " + tipo2 + "\nDebilidad 1: " + debilidad1 + "\nDebilidad 2: " + debilidad2 + "\nHP: " + hp + "\nAtaque: " + ataque + "\nDefensa: " + defensa + "\nAtaque Especial: " + ataque_especial + "\nVelocidad: " + velocidad + "\nEvoluciones: " + evo;
+    }
 }
 // entrenador,password, asd*asd+asd+asd+asd+asd+|

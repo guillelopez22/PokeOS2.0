@@ -25,13 +25,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Principal extends javax.swing.JFrame {
 
     String user = "";
+    PokeOS os = new PokeOS();
+    Entrenador loggedin = new Entrenador();
+    
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-
+        os.read();
     }
 
     /**
@@ -701,6 +704,11 @@ public class Principal extends javax.swing.JFrame {
         txt_config_contrasena.setEditable(false);
 
         jButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\POKEDEX\\1488368840_delete.png")); // NOI18N
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\POKEDEX\\1488362331_compose.png")); // NOI18N
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -1226,15 +1234,15 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usuario = txt_login_usuario.getText();
         String contra = txt_login_contrasena.getText();
-        for (int i = 0; i < lista.size(); i++) {
-            if (usuario.contentEquals(lista.get(i).getNombre())) {
-                for (int j = 0; j < lista.size(); j++) {
-                    if (contra.contentEquals(lista.get(i).getPassword())) {
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (usuario.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                for (int j = 0; j < os.entrenadores_existentes.size(); j++) {
+                    if (contra.contentEquals(os.entrenadores_existentes.get(i).getPassword())) {
                         user = txt_login_usuario.getText();
                         DefaultListModel modelo = new DefaultListModel();
-                        for (int k = 0; k < lista.size(); k++) {
-                            for (int l = 0; l < lista.get(k).getPokemon().size(); l++) {
-                                modelo.addElement(lista.get(k).getPokemon().get(l).getNombre());
+                        for (int k = 0; k < os.entrenadores_existentes.size(); k++) {
+                            for (int l = 0; l < os.entrenadores_existentes.get(k).getPokemon().size(); l++) {
+                                modelo.addElement(os.entrenadores_existentes.get(k).getPokemon().get(l).getNombre());
                             }
                         }
                         jl_pokedex_pokemones.setModel(modelo);
@@ -1300,10 +1308,10 @@ public class Principal extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_modif_pokemon.getModel();
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                    cb_modif_pokemon.addItem(lista.get(i).getPokemon().get(j).getNombre());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                    cb_modif_pokemon.addItem(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre());
                 }
             }
         }
@@ -1315,22 +1323,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        os.clear();
         JOptionPane.showMessageDialog(this, "REGISTROS ELIMINADOS");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        os.Compactar();
         JOptionPane.showMessageDialog(this, "ARCHIVO COMPACTADO");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         String poke = jl_pokedex_pokemones.getSelectedValue();
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                    if (poke.contentEquals(lista.get(i).getPokemon().get(j).getNombre())) {
-                        lista.get(i).getPokemon().remove(lista.get(i).getPokemon().get(j));
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                    if (poke.contentEquals(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre())) {
+                        os.entrenadores_existentes.get(i).getPokemon().remove(os.entrenadores_existentes.get(i).getPokemon().get(j));
                         JOptionPane.showMessageDialog(this, "POKEMON DE LA LISTA ELIMINADO");
                         lbl_pokedex_foto.setIcon(null);
                         txta_datos_pokemon.setText("");
@@ -1339,15 +1349,16 @@ public class Principal extends javax.swing.JFrame {
             }
         }
         DefaultListModel modelo = new DefaultListModel();
-        for (int k = 0; k < lista.size(); k++) {
-            for (int l = 0; l < lista.get(k).getPokemon().size(); l++) {
-                modelo.addElement(lista.get(k).getPokemon().get(l).getNombre());
+        for (int k = 0; k < os.entrenadores_existentes.size(); k++) {
+            for (int l = 0; l < os.entrenadores_existentes.get(k).getPokemon().size(); l++) {
+                modelo.addElement(os.entrenadores_existentes.get(k).getPokemon().get(l).getNombre());
             }
         }
         jl_pokedex_pokemones.setModel(modelo);
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toFile());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toFile());
         }
+        os.write();
 
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1377,25 +1388,26 @@ public class Principal extends javax.swing.JFrame {
         String imagen = txt_agreg_imagen.getText();
         String evoluciones = txt_agreg_evolucion.getText();
         System.out.println(user);
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
                 System.out.println("entrenador encontrado");
                 Pokemon pok = new Pokemon(nom_pok, apodo, descr, altura, categ, peso, hablidad1, hablidad2, hablidad3, hablidad4, genero, tipo1, tipo2, debilidad1, debilidad2, hp, ataque, defensa, ataq_especial, velocidad, imagen);
                 System.out.println("pokemon creado");
-                lista.get(i).getPokemon().add(pok);
+                os.entrenadores_existentes.get(i).getPokemon().add(pok);
                 txt_agreg_evolucion.setEnabled(true);
             }
         }
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toFile());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toFile());
         }
         DefaultListModel modelo = new DefaultListModel();
-        for (int i = 0; i < lista.size(); i++) {
-            for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                modelo.addElement(lista.get(i).getPokemon().get(j).getNombre());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                modelo.addElement(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre());
             }
         }
         jl_pokedex_pokemones.setModel(modelo);
+        os.write();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void btn_registro_registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registro_registrarseActionPerformed
@@ -1403,21 +1415,21 @@ public class Principal extends javax.swing.JFrame {
         boolean existe = true;
         String usuario = txt_registro_usuario.getText();
         String contra = txt_registro_contrasena.getText();
-        for (int i = 0; i < lista.size(); i++) {
-            if (usuario.contentEquals(lista.get(i).getNombre())) {
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (usuario.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
                 existe = false;
             }
         }
         if (existe == false) {
             JOptionPane.showMessageDialog(this, "YA EXISTE ESTE USUARIO");
         } else {
-            lista.add(new Entrenador(usuario, contra));
+            os.Agregar(new Entrenador(usuario, contra));
             JOptionPane.showMessageDialog(this, "Entrenador Agregado Existosamente");
             txt_registro_contrasena.setText("");
             txt_registro_usuario.setText("");
         }
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toString());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toString());
         }
     }//GEN-LAST:event_btn_registro_registrarseActionPerformed
 
@@ -1443,31 +1455,32 @@ public class Principal extends javax.swing.JFrame {
         String nom_pok = txt_agreg_nombre.getText();
         String evolucion = txt_agreg_evolucion.getText();
 
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                    if (nom_pok.contentEquals(lista.get(i).getPokemon().get(j).getNombre())) {
-                        lista.get(i).getPokemon().get(j).setEvoluciones(evolucion);
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                    if (nom_pok.contentEquals(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre())) {
+                        os.entrenadores_existentes.get(i).getPokemon().get(j).setEvoluciones(evolucion);
                     }
                 }
             }
         }
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toFile());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toFile());
         }
+        os.write();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jl_pokedex_pokemonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_pokedex_pokemonesMouseClicked
         // TODO add your handling code here:
         String nom_pok = jl_pokedex_pokemones.getSelectedValue();
         File archivo;
-        for (int i = 0; i < lista.size(); i++) {
-            for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                if (nom_pok.contentEquals(lista.get(i).getPokemon().get(j).getNombre())) {
-                    archivo = new File(lista.get(i).getPokemon().get(j).getImage());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                if (nom_pok.contentEquals(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre())) {
+                    archivo = new File(os.entrenadores_existentes.get(i).getPokemon().get(j).getImage());
                     Image img = Toolkit.getDefaultToolkit().createImage(archivo.getPath()).getScaledInstance(250, 250, 1);
                     this.lbl_pokedex_foto.setIcon(new ImageIcon(img));
-                    txta_datos_pokemon.setText(lista.get(i).getPokemon().get(j).toFile1());
+                    txta_datos_pokemon.setText(os.entrenadores_existentes.get(i).getPokemon().get(j).toFile1());
                 }
             }
         }
@@ -1477,29 +1490,29 @@ public class Principal extends javax.swing.JFrame {
     private void cb_modif_pokemonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_modif_pokemonItemStateChanged
         // TODO add your handling code here:
         int pos = cb_modif_pokemon.getSelectedIndex();
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                txt_agreg_nombre1.setText(lista.get(i).getPokemon().get(pos).getNombre());
-                txt_agreg_apodo1.setText(lista.get(i).getPokemon().get(pos).getApodo());
-                txt_agreg_descr1.setText(lista.get(i).getPokemon().get(pos).getDescripcion());
-                txt_agreg_altura1.setText(Double.toString(lista.get(i).getPokemon().get(pos).getAltura()));
-                txt_agreg_categoria1.setText(lista.get(i).getPokemon().get(pos).getCategoria());
-                txt_agreg_peso1.setText(Double.toString(lista.get(i).getPokemon().get(pos).getPeso()));
-                txt_agreg_hab5.setText(lista.get(i).getPokemon().get(pos).getHabilidad1());
-                txt_agreg_hab6.setText(lista.get(i).getPokemon().get(pos).getHabilidad2());
-                txt_agreg_hab7.setText(lista.get(i).getPokemon().get(pos).getHabilidad3());
-                txt_agreg_hab8.setText(lista.get(i).getPokemon().get(pos).getHabilidad4());
-                txt_agreg_genero1.setText(lista.get(i).getPokemon().get(pos).getGenero());
-                txt_agreg_tipo3.setText(lista.get(i).getPokemon().get(pos).getTipo1());
-                txt_agreg_tipo4.setText(lista.get(i).getPokemon().get(pos).getTipo2());
-                txt_agreg_debilidad3.setText(lista.get(i).getPokemon().get(pos).getDebilidad1());
-                txt_agreg_debilidad4.setText(lista.get(i).getPokemon().get(pos).getDebilidad2());
-                txt_agreg_hp1.setText(Double.toString(lista.get(i).getPokemon().get(pos).getHp()));
-                txt_agreg_ataque1.setText(Double.toString(lista.get(i).getPokemon().get(pos).getAtaque()));
-                txt_agreg_defensa1.setText(Double.toString(lista.get(i).getPokemon().get(pos).getDefensa()));
-                txt_agreg_ataque_especial1.setText(Double.toString(lista.get(i).getPokemon().get(pos).getAtaque_especial()));
-                txt_agreg_velocidad1.setText(Double.toString(lista.get(i).getPokemon().get(pos).getVelocidad()));
-                txt_agreg_imagen1.setText(lista.get(i).getPokemon().get(pos).getImage());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                txt_agreg_nombre1.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getNombre());
+                txt_agreg_apodo1.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getApodo());
+                txt_agreg_descr1.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getDescripcion());
+                txt_agreg_altura1.setText(Double.toString(os.entrenadores_existentes.get(i).getPokemon().get(pos).getAltura()));
+                txt_agreg_categoria1.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getCategoria());
+                txt_agreg_peso1.setText(Double.toString(os.entrenadores_existentes.get(i).getPokemon().get(pos).getPeso()));
+                txt_agreg_hab5.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getHabilidad1());
+                txt_agreg_hab6.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getHabilidad2());
+                txt_agreg_hab7.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getHabilidad3());
+                txt_agreg_hab8.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getHabilidad4());
+                txt_agreg_genero1.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getGenero());
+                txt_agreg_tipo3.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getTipo1());
+                txt_agreg_tipo4.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getTipo2());
+                txt_agreg_debilidad3.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getDebilidad1());
+                txt_agreg_debilidad4.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getDebilidad2());
+                txt_agreg_hp1.setText(Double.toString(os.entrenadores_existentes.get(i).getPokemon().get(pos).getHp()));
+                txt_agreg_ataque1.setText(Double.toString(os.entrenadores_existentes.get(i).getPokemon().get(pos).getAtaque()));
+                txt_agreg_defensa1.setText(Double.toString(os.entrenadores_existentes.get(i).getPokemon().get(pos).getDefensa()));
+                txt_agreg_ataque_especial1.setText(Double.toString(os.entrenadores_existentes.get(i).getPokemon().get(pos).getAtaque_especial()));
+                txt_agreg_velocidad1.setText(Double.toString(os.entrenadores_existentes.get(i).getPokemon().get(pos).getVelocidad()));
+                txt_agreg_imagen1.setText(os.entrenadores_existentes.get(i).getPokemon().get(pos).getImage());
             }
         }
     }//GEN-LAST:event_cb_modif_pokemonItemStateChanged
@@ -1507,41 +1520,41 @@ public class Principal extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
         int pos = cb_modif_pokemon.getSelectedIndex();
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                lista.get(i).getPokemon().get(pos).setNombre(txt_agreg_nombre1.getText());
-                lista.get(i).getPokemon().get(pos).setApodo(txt_agreg_apodo1.getText());
-                lista.get(i).getPokemon().get(pos).setDescripcion(txt_agreg_descr1.getText());
-                lista.get(i).getPokemon().get(pos).setAltura(Double.parseDouble(txt_agreg_altura1.getText()));
-                lista.get(i).getPokemon().get(pos).setCategoria(txt_agreg_categoria1.getText());
-                lista.get(i).getPokemon().get(pos).setPeso(Double.parseDouble(txt_agreg_peso1.getText()));
-                lista.get(i).getPokemon().get(pos).setHabilidad1(txt_agreg_hab5.getText());
-                lista.get(i).getPokemon().get(pos).setHabilidad2(txt_agreg_hab6.getText());
-                lista.get(i).getPokemon().get(pos).setHabilidad3(txt_agreg_hab7.getText());
-                lista.get(i).getPokemon().get(pos).setHabilidad4(txt_agreg_hab8.getText());
-                lista.get(i).getPokemon().get(pos).setGenero(txt_agreg_genero1.getText());
-                lista.get(i).getPokemon().get(pos).setTipo1(txt_agreg_tipo1.getText());
-                lista.get(i).getPokemon().get(pos).setTipo2(txt_agreg_tipo2.getText());
-                lista.get(i).getPokemon().get(pos).setDebilidad1(txt_agreg_debilidad1.getText());
-                lista.get(i).getPokemon().get(pos).setDebilidad2(txt_agreg_debilidad2.getText());
-                lista.get(i).getPokemon().get(pos).setHp(Double.parseDouble(txt_agreg_hp1.getText()));
-                lista.get(i).getPokemon().get(pos).setAtaque(Double.parseDouble(txt_agreg_ataque1.getText()));
-                lista.get(i).getPokemon().get(pos).setDefensa(Double.parseDouble(txt_agreg_nombre1.getText()));
-                lista.get(i).getPokemon().get(pos).setAtaque_especial(Double.parseDouble(txt_agreg_ataque_especial1.getText()));
-                lista.get(i).getPokemon().get(pos).setVelocidad(Double.parseDouble(txt_agreg_velocidad1.getText()));
-                lista.get(i).getPokemon().get(pos).setImage(txt_agreg_imagen1.getText());
-//                lista.get(i).getPokemon().get(pos).setNombre(txt_agreg_nombre1.getText());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setNombre(txt_agreg_nombre1.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setApodo(txt_agreg_apodo1.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setDescripcion(txt_agreg_descr1.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setAltura(Double.parseDouble(txt_agreg_altura1.getText()));
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setCategoria(txt_agreg_categoria1.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setPeso(Double.parseDouble(txt_agreg_peso1.getText()));
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setHabilidad1(txt_agreg_hab5.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setHabilidad2(txt_agreg_hab6.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setHabilidad3(txt_agreg_hab7.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setHabilidad4(txt_agreg_hab8.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setGenero(txt_agreg_genero1.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setTipo1(txt_agreg_tipo1.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setTipo2(txt_agreg_tipo2.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setDebilidad1(txt_agreg_debilidad1.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setDebilidad2(txt_agreg_debilidad2.getText());
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setHp(Double.parseDouble(txt_agreg_hp1.getText()));
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setAtaque(Double.parseDouble(txt_agreg_ataque1.getText()));
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setDefensa(Double.parseDouble(txt_agreg_defensa1.getText()));
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setAtaque_especial(Double.parseDouble(txt_agreg_ataque_especial1.getText()));
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setVelocidad(Double.parseDouble(txt_agreg_velocidad1.getText()));
+                os.entrenadores_existentes.get(i).getPokemon().get(pos).setImage(txt_agreg_imagen1.getText());
+//                os.entrenadores_existentes.get(i).getPokemon().get(pos).setNombre(txt_agreg_nombre1.getText());
 
             }
         }
         DefaultListModel modelo = new DefaultListModel();
-        for (int i = 0; i < lista.size(); i++) {
-            for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                modelo.addElement(lista.get(i).getPokemon().get(j).getNombre());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                modelo.addElement(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre());
             }
         }
         jl_pokedex_pokemones.setModel(modelo);
-
+        os.write();
 
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -1566,18 +1579,18 @@ public class Principal extends javax.swing.JFrame {
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         // TODO add your handling code here:
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_transferir_usuario.getModel();
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
             } else {
-                cb_transferir_usuario.addItem(lista.get(i).getNombre());
+                cb_transferir_usuario.addItem(os.entrenadores_existentes.get(i).getNombre());
             }
         }
         cb_transferir_usuario.setModel(modelo);
         DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) cb_transferir_pokemon.getModel();
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                    cb_transferir_pokemon.addItem(lista.get(i).getPokemon().get(j).getNombre());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                    cb_transferir_pokemon.addItem(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre());
                 }
             }
         }
@@ -1593,51 +1606,52 @@ public class Principal extends javax.swing.JFrame {
         String usuario_a_transferir = cb_transferir_usuario.getSelectedItem().toString();
         int pokemon_a_transferir = cb_transferir_pokemon.getSelectedIndex();
         Pokemon poke = new Pokemon();
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                poke = lista.get(i).getPokemon().get(pokemon_a_transferir);
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                poke = os.entrenadores_existentes.get(i).getPokemon().get(pokemon_a_transferir);
 
             }
         }
         System.out.println("AGARRA POKEMON");
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toFile());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toFile());
         }
-        for (int i = 0; i < lista.size(); i++) {
-            if (usuario_a_transferir.contentEquals(lista.get(i).getNombre())) {
-                lista.get(i).setPokemon(poke);
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (usuario_a_transferir.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                os.entrenadores_existentes.get(i).setPokemon(poke);
             }
         }
         System.out.println("TRANSFIERE POKEMON");
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toFile());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toFile());
         }
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                lista.get(i).getPokemon().remove(pokemon_a_transferir);
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                os.entrenadores_existentes.get(i).getPokemon().remove(pokemon_a_transferir);
             }
         }
         System.out.println("BORRA POKEMON");
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toFile());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toFile());
         }
         DefaultListModel modelo = new DefaultListModel();
-        for (int i = 0; i < lista.size(); i++) {
-            for (int j = 0; j < lista.get(i).getPokemon().size(); j++) {
-                modelo.addElement(lista.get(i).getPokemon().get(j).getNombre());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            for (int j = 0; j < os.entrenadores_existentes.get(i).getPokemon().size(); j++) {
+                modelo.addElement(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre());
             }
         }
-        jl_pokedex_pokemones.setModel(modelo);
+        jl_pokedex_pokemones.setModel(modelo);        
         txta_datos_pokemon.setText("");
         lbl_pokedex_foto.setIcon(null);
+        os.write();
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        for (int i = 0; i < lista.size(); i++) {
-            if (user.contentEquals(lista.get(i).getNombre())) {
-                txt_config_usuario.setText(lista.get(i).getNombre());
-                txt_config_contrasena.setText(lista.get(i).getNombre());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                txt_config_usuario.setText(os.entrenadores_existentes.get(i).getNombre());
+                txt_config_contrasena.setText(os.entrenadores_existentes.get(i).getPassword());
             }
         }
         jd_config_cuenta.setModal(true);
@@ -1655,13 +1669,13 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usuario = txt_config_usuario.getText();
         String password = txt_config_contrasena.getText();
-        for (int i = 0; i < lista.size(); i++) {
-            if (usuario.contentEquals(lista.get(i).getNombre())) {
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (usuario.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
                 JOptionPane.showMessageDialog(this, "USUARIO YA EXISTENTE");
             } else {
-                if (user.contentEquals(lista.get(i).getNombre())) {
-                    lista.get(i).setPassword(password);
-                    lista.get(i).setNombre(usuario);
+                if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                    os.entrenadores_existentes.get(i).setPassword(password);
+                    os.entrenadores_existentes.get(i).setNombre(usuario);
                     user=usuario;
                     txt_config_contrasena.setText("");
                     txt_config_usuario.setText("");
@@ -1670,11 +1684,22 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         }
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toFile());
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            System.out.println(os.entrenadores_existentes.get(i).toFile());
             
         }
+        os.write();
     }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
+                loggedin = os.entrenadores_existentes.get(i);
+            }
+        }
+        os.Borrar(loggedin);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1864,5 +1889,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txt_registro_usuario;
     private javax.swing.JTextArea txta_datos_pokemon;
     // End of variables declaration//GEN-END:variables
-ArrayList<Entrenador> lista = new ArrayList();
+
 }
