@@ -1271,28 +1271,31 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String usuario = txt_login_usuario.getText();
+        System.out.println("usuario:" + usuario);
         String contra = txt_login_contrasena.getText();
+        DefaultListModel modelo = new DefaultListModel();
         for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
             if (usuario.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
-                for (int j = 0; j < os.entrenadores_existentes.size(); j++) {
-                    if (contra.contentEquals(os.entrenadores_existentes.get(i).getPassword())) {
-                        user = txt_login_usuario.getText();
-                        DefaultListModel modelo = new DefaultListModel();
-                        for (int k = 0; k < os.entrenadores_existentes.size(); k++) {
+                if (contra.contentEquals(os.entrenadores_existentes.get(i).getPassword())) {
+                    user = txt_login_usuario.getText();
+                    for (int k = 0; k < os.entrenadores_existentes.size(); k++) {
+                        if (user.contentEquals(os.entrenadores_existentes.get(k).getNombre())) {
                             for (int l = 0; l < os.entrenadores_existentes.get(k).getPokemon().size(); l++) {
                                 modelo.addElement(os.entrenadores_existentes.get(k).getPokemon().get(l).getNombre());
+
                             }
                         }
-                        jl_pokedex_pokemones.setModel(modelo);
-                        jd_iniciar_sesion.setModal(true);
-                        jd_iniciar_sesion.pack();
-                        jd_iniciar_sesion.setVisible(true);
-
                     }
+
                 }
             }
 
         }
+        txta_datos_pokemon.setText("");
+        jl_pokedex_pokemones.setModel(modelo);
+        jd_iniciar_sesion.setModal(true);
+        jd_iniciar_sesion.pack();
+        jd_iniciar_sesion.setVisible(true);
         txt_login_contrasena.setText("");
         txt_login_usuario.setText("");
 
