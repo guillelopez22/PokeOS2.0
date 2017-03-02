@@ -1693,12 +1693,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
+        os.read();
         for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
             if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
                 loggedin = os.entrenadores_existentes.get(i);
             }
         }
         os.Borrar(loggedin);
+        jd_config_cuenta.dispose();
+        jd_iniciar_sesion.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
@@ -1889,5 +1892,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txt_registro_usuario;
     private javax.swing.JTextArea txta_datos_pokemon;
     // End of variables declaration//GEN-END:variables
-
+    ArrayList HDD= new ArrayList();
+    ArrayList<Entrenador[]> Disco = new ArrayList();
+    Entrenador[] pista = new Entrenador[10];
 }

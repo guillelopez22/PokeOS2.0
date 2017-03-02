@@ -177,6 +177,7 @@ public class PokeOS {
 
                             }
                         }
+                        System.out.println(borrados.Peek());
                         borrados.insert(ash);
                         code = is.readLine();
                     }
@@ -361,7 +362,7 @@ public class PokeOS {
             if (!entrenadores_existentes.get(x).toFile().equals(entrenador.toFile())) {
                 System.out.println("NO EXISTE");
             } else {
-
+                System.out.println("entra al else");
                 Entrenador toFile = null;
                 String match = "";
                 for (int i = 0; i < entrenadores_existentes.size(); i++) {
@@ -381,14 +382,15 @@ public class PokeOS {
                     int linecount = 0;
                     String line;
                     int start = -1, end = -1;
-                    while ((line = is.readLine()) != null) {
+                    
+                    do {
+                        line= is.readLine();
+                        System.out.println(line);
+                        System.out.println("entra a primer while");
                         linecount++;
-
                         Matcher m = p.matcher(line);
-
+                        System.out.println("hace matcher");
                         // indicate all matches on the line
-                        System.out.println("test");
-                        System.out.println(p.matcher(line));
                         while (m.find()) {
                             System.out.println("//////////////////////////////////////////////////////////////////////////////////////////");
                             offset = m.start();
@@ -418,7 +420,7 @@ public class PokeOS {
                             }
 
                         }
-                    }
+                    }while ((line = is.readLine()) != null);
 
                 } catch (Exception e) {
                 }
