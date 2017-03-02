@@ -27,7 +27,6 @@ public class Principal extends javax.swing.JFrame {
     String user = "";
     PokeOS os = new PokeOS();
     Entrenador loggedin = new Entrenador();
-    
 
     /**
      * Creates new form Principal
@@ -127,6 +126,19 @@ public class Principal extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
         jd_debug = new javax.swing.JDialog();
+        jLabel60 = new javax.swing.JLabel();
+        lbl_2 = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
+        lbl4 = new javax.swing.JLabel();
+        lbl5 = new javax.swing.JLabel();
+        lbl6 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        lbl8 = new javax.swing.JLabel();
+        lbl9 = new javax.swing.JLabel();
+        lbl10 = new javax.swing.JLabel();
+        lbl7 = new javax.swing.JLabel();
         jd_modificar = new javax.swing.JDialog();
         jLabel33 = new javax.swing.JLabel();
         txt_agreg_nombre1 = new javax.swing.JTextField();
@@ -271,6 +283,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\POKEDEX\\1488361266_virus_definitions.png")); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\POKEDEX\\1488361517_edit-clear.png")); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -774,16 +791,37 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jd_debugLayout = new javax.swing.GroupLayout(jd_debug.getContentPane());
-        jd_debug.getContentPane().setLayout(jd_debugLayout);
-        jd_debugLayout.setHorizontalGroup(
-            jd_debugLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jd_debugLayout.setVerticalGroup(
-            jd_debugLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jd_debug.getContentPane().setLayout(null);
+
+        jLabel60.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\POKEDEX\\descarga.png")); // NOI18N
+        jd_debug.getContentPane().add(jLabel60);
+        jLabel60.setBounds(190, 10, 299, 94);
+        jd_debug.getContentPane().add(lbl_2);
+        lbl_2.setBounds(350, 140, 0, 0);
+        jd_debug.getContentPane().add(lbl1);
+        lbl1.setBounds(350, 140, 0, 0);
+        jd_debug.getContentPane().add(lbl2);
+        lbl2.setBounds(520, 320, 0, 0);
+        jd_debug.getContentPane().add(lbl3);
+        lbl3.setBounds(120, 320, 0, 0);
+        jd_debug.getContentPane().add(lbl4);
+        lbl4.setBounds(270, 510, 0, 0);
+        jd_debug.getContentPane().add(lbl5);
+        lbl5.setBounds(450, 500, 0, 0);
+        jd_debug.getContentPane().add(lbl6);
+        lbl6.setBounds(460, 210, 0, 0);
+        jd_debug.getContentPane().add(jLabel62);
+        jLabel62.setBounds(190, 190, 0, 0);
+        jd_debug.getContentPane().add(lbl8);
+        lbl8.setBounds(160, 440, 0, 0);
+        jd_debug.getContentPane().add(lbl9);
+        lbl9.setBounds(550, 400, 0, 0);
+        jd_debug.getContentPane().add(lbl10);
+        lbl10.setBounds(430, 460, 0, 0);
+
+        lbl7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\GitHub\\Untitled.jpg")); // NOI18N
+        jd_debug.getContentPane().add(lbl7);
+        lbl7.setBounds(0, 116, 708, 443);
 
         jLabel33.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\POKEDEX\\descarga.png")); // NOI18N
 
@@ -1640,7 +1678,7 @@ public class Principal extends javax.swing.JFrame {
                 modelo.addElement(os.entrenadores_existentes.get(i).getPokemon().get(j).getNombre());
             }
         }
-        jl_pokedex_pokemones.setModel(modelo);        
+        jl_pokedex_pokemones.setModel(modelo);
         txta_datos_pokemon.setText("");
         lbl_pokedex_foto.setIcon(null);
         os.write();
@@ -1676,7 +1714,7 @@ public class Principal extends javax.swing.JFrame {
                 if (user.contentEquals(os.entrenadores_existentes.get(i).getNombre())) {
                     os.entrenadores_existentes.get(i).setPassword(password);
                     os.entrenadores_existentes.get(i).setNombre(usuario);
-                    user=usuario;
+                    user = usuario;
                     txt_config_contrasena.setText("");
                     txt_config_usuario.setText("");
                     jd_config_cuenta.dispose();
@@ -1686,7 +1724,7 @@ public class Principal extends javax.swing.JFrame {
         }
         for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
             System.out.println(os.entrenadores_existentes.get(i).toFile());
-            
+
         }
         os.write();
     }//GEN-LAST:event_jButton19ActionPerformed
@@ -1700,9 +1738,87 @@ public class Principal extends javax.swing.JFrame {
             }
         }
         os.Borrar(loggedin);
+        jl_pokedex_pokemones.removeAll();
+        txta_datos_pokemon.setText("");
+        lbl_pokedex_foto.setIcon(null);
         jd_config_cuenta.dispose();
         jd_iniciar_sesion.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < os.entrenadores_existentes.size(); i++) {
+            if (os.entrenadores_existentes.size() == 1) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+            } else if (os.entrenadores_existentes.size() == 2) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+            } else if (os.entrenadores_existentes.size() == 3) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+            } else if (os.entrenadores_existentes.size() == 4) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+                lbl4.setText(os.entrenadores_existentes.get(3).getNombre());
+            } else if (os.entrenadores_existentes.size() == 5) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+                lbl4.setText(os.entrenadores_existentes.get(3).getNombre());
+                lbl5.setText(os.entrenadores_existentes.get(4).getNombre());
+            } else if (os.entrenadores_existentes.size() == 6) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+                lbl4.setText(os.entrenadores_existentes.get(3).getNombre());
+                lbl5.setText(os.entrenadores_existentes.get(4).getNombre());
+                lbl6.setText(os.entrenadores_existentes.get(5).getNombre());
+            } else if (os.entrenadores_existentes.size() == 7) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+                lbl4.setText(os.entrenadores_existentes.get(3).getNombre());
+                lbl5.setText(os.entrenadores_existentes.get(4).getNombre());
+                lbl6.setText(os.entrenadores_existentes.get(5).getNombre());
+                lbl7.setText(os.entrenadores_existentes.get(6).getNombre());
+            } else if (os.entrenadores_existentes.size() == 8) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+                lbl4.setText(os.entrenadores_existentes.get(3).getNombre());
+                lbl5.setText(os.entrenadores_existentes.get(4).getNombre());
+                lbl6.setText(os.entrenadores_existentes.get(5).getNombre());
+                lbl7.setText(os.entrenadores_existentes.get(6).getNombre());
+                lbl8.setText(os.entrenadores_existentes.get(7).getNombre());
+            } else if (os.entrenadores_existentes.size() == 9) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+                lbl4.setText(os.entrenadores_existentes.get(3).getNombre());
+                lbl5.setText(os.entrenadores_existentes.get(4).getNombre());
+                lbl6.setText(os.entrenadores_existentes.get(5).getNombre());
+                lbl7.setText(os.entrenadores_existentes.get(6).getNombre());
+                lbl8.setText(os.entrenadores_existentes.get(7).getNombre());
+                lbl9.setText(os.entrenadores_existentes.get(8).getNombre());
+            } else if (os.entrenadores_existentes.size() == 10) {
+                lbl1.setText(os.entrenadores_existentes.get(0).getNombre());
+                lbl2.setText(os.entrenadores_existentes.get(1).getNombre());
+                lbl3.setText(os.entrenadores_existentes.get(2).getNombre());
+                lbl4.setText(os.entrenadores_existentes.get(3).getNombre());
+                lbl5.setText(os.entrenadores_existentes.get(4).getNombre());
+                lbl6.setText(os.entrenadores_existentes.get(5).getNombre());
+                lbl7.setText(os.entrenadores_existentes.get(6).getNombre());
+                lbl8.setText(os.entrenadores_existentes.get(7).getNombre());
+                lbl9.setText(os.entrenadores_existentes.get(8).getNombre());
+                lbl10.setText(os.entrenadores_existentes.get(9).getNombre());
+            }
+        }
+        jd_debug.setModal(true);
+        jd_debug.pack();
+        jd_debug.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1827,6 +1943,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1840,6 +1958,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_registrarse;
     private javax.swing.JDialog jd_transferir_pokemon;
     private javax.swing.JList<String> jl_pokedex_pokemones;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl10;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
+    private javax.swing.JLabel lbl6;
+    private javax.swing.JLabel lbl7;
+    private javax.swing.JLabel lbl8;
+    private javax.swing.JLabel lbl9;
+    private javax.swing.JLabel lbl_2;
     private javax.swing.JLabel lbl_pokedex_foto;
     private javax.swing.JFormattedTextField txt_agreg_altura;
     private javax.swing.JFormattedTextField txt_agreg_altura1;
@@ -1892,7 +2021,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txt_registro_usuario;
     private javax.swing.JTextArea txta_datos_pokemon;
     // End of variables declaration//GEN-END:variables
-    ArrayList HDD= new ArrayList();
+    ArrayList HDD = new ArrayList();
     ArrayList<Entrenador[]> Disco = new ArrayList();
     Entrenador[] pista = new Entrenador[10];
 }
