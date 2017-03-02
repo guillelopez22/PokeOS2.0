@@ -115,7 +115,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel55 = new javax.swing.JLabel();
         txt_agreg_evolucion = new javax.swing.JTextField();
         jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
+        btn_agreg_evo = new javax.swing.JButton();
         jd_config_cuenta = new javax.swing.JDialog();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -508,10 +508,11 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton15.setText("Agregar");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        btn_agreg_evo.setText("Agregar");
+        btn_agreg_evo.setEnabled(false);
+        btn_agreg_evo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                btn_agreg_evoActionPerformed(evt);
             }
         });
 
@@ -626,7 +627,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txt_agreg_evolucion, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton15)
+                .addComponent(btn_agreg_evo)
                 .addGap(12, 12, 12))
             .addGroup(jd_agregar_pokemonLayout.createSequentialGroup()
                 .addGap(295, 295, 295)
@@ -705,7 +706,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(txt_agreg_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel55)
                     .addComponent(txt_agreg_evolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15))
+                    .addComponent(btn_agreg_evo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton9))
         );
@@ -1448,6 +1449,7 @@ public class Principal extends javax.swing.JFrame {
             }
         }
         jl_pokedex_pokemones.setModel(modelo);
+        btn_agreg_evo.enable();
         os.write();
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1491,7 +1493,7 @@ public class Principal extends javax.swing.JFrame {
         txt_agreg_imagen.setText(ruta);
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+    private void btn_agreg_evoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agreg_evoActionPerformed
         // TODO add your handling code here:
         String nom_pok = txt_agreg_nombre.getText();
         String evolucion = txt_agreg_evolucion.getText();
@@ -1509,7 +1511,7 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(os.entrenadores_existentes.get(i).toFile());
         }
         os.write();
-    }//GEN-LAST:event_jButton15ActionPerformed
+    }//GEN-LAST:event_btn_agreg_evoActionPerformed
 
     private void jl_pokedex_pokemonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_pokedex_pokemonesMouseClicked
         // TODO add your handling code here:
@@ -1867,6 +1869,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_agreg_evo;
     private javax.swing.JButton btn_registro_registrarse;
     private javax.swing.JComboBox<String> cb_modif_pokemon;
     private javax.swing.JComboBox<String> cb_transferir_pokemon;
@@ -1877,7 +1880,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;

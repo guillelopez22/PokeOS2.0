@@ -451,7 +451,7 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton15" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_agreg_evo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
@@ -543,7 +543,7 @@
                       <Component id="txt_agreg_genero" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel55" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_agreg_evolucion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton15" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_agreg_evo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton9" min="-2" max="-2" attributes="0"/>
@@ -775,12 +775,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton14ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton15">
+        <Component class="javax.swing.JButton" name="btn_agreg_evo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_agreg_evoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
